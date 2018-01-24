@@ -4,8 +4,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 COPY fastcgi.conf /etc/nginx/fastcgi.conf
 
-RUN chmod 1777 /var/cache/nginx
-RUN chmod 1777 /var/run
+RUN chown nginx:root /var/cache/nginx
+RUN chmod 770 /var/cache/nginx
+RUN chown :root /var/run /run
+RUN chmod 775 /var/run /run
 
 USER nginx
 
