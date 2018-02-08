@@ -6,7 +6,7 @@ COPY fastcgi.conf /etc/nginx/fastcgi.conf
 
 RUN chown nginx:root /var/cache/nginx
 RUN chmod 770 /var/cache/nginx
-RUN chown :root /var/run /run
+RUN chown nginx:root /var/run /run
 RUN chmod 775 /var/run /run
 
 USER nginx
