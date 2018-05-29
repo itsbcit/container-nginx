@@ -8,7 +8,7 @@ Runs on port 8080
 
 ## How to Modify
 
-### Extend the Image
+### Option 1: Extend the Image
 
 The following directories house configuration files
 
@@ -27,7 +27,7 @@ COPY default.vh.conf /etc/nginx/conf.d/default.conf
 COPY my_website_code /path/configured/in/default.conf/above
 ```
 
-### Using OpenShift ConfigMaps/Volumes
+### Option 2: Using OpenShift ConfigMaps/Volumes
 
 The image has a docker-entrypoint script that checks for the existence of `/config`
 
