@@ -29,16 +29,9 @@ COPY my_website_code /path/configured/in/default.conf/above
 
 ### Using OpenShift ConfigMaps/Volumes
 
-The image has a docker-entrypoint script that checks for the existence of /config
+The image has a docker-entrypoint script that checks for the existence of `/config`
 
-The following filenames within /config are looked for to be copied to their proper configuration locations for nginx
-
-| **filename in /config** | **destination**                |
-| ----------------------- | ------------------------------ |
-| `nginx.conf`            | `/etc/nginx/nginx.conf`        |
-| `fastcgi.conf`          | `/etc/nginx/fastcgi.conf`      |
-| `fastcgi_params`        | `/etc/nginx/fastcgi_params`    |
-| `default.conf`          | `/etc/nginx/conf.d/default.conf` |
+All of the files in `/config` are then copied into `/etc/nginx/` and `default.conf` moved from `/etc/nginx` to `/etc/nginx/conf.d/`
 
 Only `default.conf` is required.
 
