@@ -20,13 +20,15 @@ RUN chmod 664 /etc/passwd /etc/group
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
 ## END addition of DE from bcit/alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY nginx-default.conf /etc/nginx/conf.d/default.conf
-COPY fastcgi.conf /etc/nginx/fastcgi.conf
+#COPY nginx.conf /etc/nginx/nginx.conf
+#COPY nginx-default.conf /etc/nginx/conf.d/default.conf
+#COPY fastcgi.conf /etc/nginx/fastcgi.conf
 
 RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
     && chmod 770 /var/cache/nginx \
-    && chmod 775 /var/run /run /var/log/nginx
+    && chmod 775 /var/run /run /var/log/nginx \
+    && sed -i "s/user  nginx;/#user  nginx;/" /etc/nginx/nginx.conf \
+    && sed -i "s/listen       80;/listen       8080;/" /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080
 
