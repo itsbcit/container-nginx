@@ -1,4 +1,3 @@
-
 config_path=/config
 nginx_conf_path=/etc/nginx
 nginx_site_conf_file=default.conf
