@@ -32,18 +32,18 @@ The image has a docker-entrypoint script that checks for the existence of /confi
 
 The following filenames within /config are looked for to be copied to their proper configuration locations for nginx
 
-| **filename in `/config**` | **destination**                |
-| ------------------------- | ------------------------------ |
-| `nginx.conf`              | `/etc/nginx/nginx.conf`        |
-| `fastcgi.conf```          | `/etc/nginx/fastcgi.conf`      |
-| `fastcgi_params`          | `/etc/nginx/fastcgi_params`    |
-| `default.conf`            | `/etc/nginx/conf/default.conf` |
+| **filename in /config** | **destination**                |
+| ----------------------- | ------------------------------ |
+| `nginx.conf`            | `/etc/nginx/nginx.conf`        |
+| `fastcgi.conf`          | `/etc/nginx/fastcgi.conf`      |
+| `fastcgi_params`        | `/etc/nginx/fastcgi_params`    |
+| `default.conf`          | `/etc/nginx/conf/default.conf` |
 
-Only **default.conf** is required.
+Only `default.conf` is required.
 
 The above files can be added as key/value (filename/contents) as a ConfigMap within Openshift and mounted to `/config`.
 
-You will then need to create a PVC/Volume within OpenShift to match the website configuration directory in **`default.conf`**.
+You will then need to create a PVC/Volume within OpenShift to match the website configuration directory in `default.conf`.
 
 1. Create ConfigMap in OpenShift with the contents required.
 
