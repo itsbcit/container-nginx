@@ -24,15 +24,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 COPY fastcgi.conf /etc/nginx/fastcgi.conf
 
-RUN chown nginx:root /var/cache/nginx
-RUN chmod 770 /var/cache/nginx
-RUN chown nginx:root /var/run /run
-RUN chmod 775 /var/run /run
-
-USER nginx
+RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
+    && chmod 770 /var/cache/nginx \
+    && chmod 775 /var/run /run /var/log/nginx
 
 EXPOSE 8080
 
+USER nginx
 WORKDIR /application
 
 CMD ["nginx", "-g", "daemon off;"]
