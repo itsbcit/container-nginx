@@ -20,6 +20,7 @@ RUN chmod 664 /etc/passwd /etc/group
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
 ## END addition of DE from bcit/alpine
 
+#wordpress specific stuff
 #COPY nginx.conf /etc/nginx/nginx.conf
 #COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 #COPY fastcgi.conf /etc/nginx/fastcgi.conf
@@ -28,16 +29,14 @@ RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
     && chmod 770 /var/cache/nginx \
     && chmod 775 /var/run /run /var/log/nginx \
     && sed -i "s/user  nginx;/#user  nginx;/" /etc/nginx/nginx.conf \
-    && sed -i "s/listen       80;/listen       8080;/" /etc/nginx/conf.d/default.conf
+    && sed -i "s/listen       80;/listen       8080;/" /etc/nginx/conf.d/default.conf \
+    #required for 50-copy-nginx-config.sh to copy config files
+    && chmod 775 -R /etc/nginx/
 
-EXPOSE 8080
+COPY 50-copy-nginx-config.sh /docker-entrypoint.d/
 
 USER nginx
 WORKDIR /application
 
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
-
-
-
-#COPY nginx.conf /etc/nginx/nginx.conf
-#COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
