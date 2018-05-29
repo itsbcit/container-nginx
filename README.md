@@ -14,15 +14,16 @@ The following directories house configuration files
 
 - `/etc/nginx/`
 
-- `/etc/nginx/conf/`
+- `/etc/nginx/conf.d/`
 
   so copy your relevent config files there. Example Dockerfile:
 
 ```dockerfile
 FROM artifactory.repo.addr/openshift-nginx
+
 COPY nginx.conf /etc/nginx/
 COPY fastcgi_params /etc/nginx/
-COPY default.vh.conf /etc/nginx/conf/default.conf
+COPY default.vh.conf /etc/nginx/conf.d/default.conf
 COPY my_website_code /path/configured/in/default.conf/above
 ```
 
@@ -37,7 +38,7 @@ The following filenames within /config are looked for to be copied to their prop
 | `nginx.conf`            | `/etc/nginx/nginx.conf`        |
 | `fastcgi.conf`          | `/etc/nginx/fastcgi.conf`      |
 | `fastcgi_params`        | `/etc/nginx/fastcgi_params`    |
-| `default.conf`          | `/etc/nginx/conf/default.conf` |
+| `default.conf`          | `/etc/nginx/conf.d/default.conf` |
 
 Only `default.conf` is required.
 
