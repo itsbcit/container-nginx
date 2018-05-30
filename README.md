@@ -6,6 +6,12 @@ Running the image without any modifitcation gives default "Welcome to nginx!"
 
 Runs on port 8080
 
+## How to Run With Default Behavior
+```bash
+docker pull bcit/openshift-nginx
+docker run -it -u 100000 -p 8080:8080 bcit/openshift-nginx
+```
+
 ## How to Modify
 
 ### Option 1: Extend the Image
