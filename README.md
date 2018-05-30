@@ -25,7 +25,7 @@ The following directories house configuration files
   so copy your relevent config files there. Example Dockerfile:
 
 ```dockerfile
-FROM artifactory.repo.addr/openshift-nginx
+FROM bcit/openshift-nginx
 
 COPY nginx.conf /etc/nginx/
 COPY fastcgi_params /etc/nginx/
