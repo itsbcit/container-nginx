@@ -2,7 +2,7 @@
 
 ## Default Behavior
 
-Running the image without any modifitcation gives default "Welcome to nginx!"
+Running the image without any modification gives default "Welcome to nginx!"
 
 Runs on port 8080
 
