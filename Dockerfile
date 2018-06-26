@@ -35,6 +35,8 @@ RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
 
 COPY 50-copy-nginx-config.sh /docker-entrypoint.d/
 
+RUN touch /usr/share/nginx/html/ping
+
 USER nginx
 WORKDIR /application
 
