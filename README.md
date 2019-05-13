@@ -1,4 +1,7 @@
-# nginx OpenShift image
+# alpine based nginx OpenShift image
+
+## Supported Tags
+* [`1.15, latest`](https://github.com/itsbcit/openshift-nginx/blob/master/Dockerfile)
 
 ## Default Behavior
 
