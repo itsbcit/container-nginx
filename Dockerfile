@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:1.15-alpine
 
 ## START addition of DE from bcit/alpine
 ENV RUNUSER none
