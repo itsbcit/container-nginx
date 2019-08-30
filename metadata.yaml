@@ -3,3 +3,5 @@ image_name: openshift-nginx
 labels:
   maintainer: 'chriswood@gmail.com'
   nginx_version: '1.15'
+suffixes:
+  - '1.15'
