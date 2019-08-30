@@ -1,23 +1,13 @@
-FROM nginx:1.15-alpine
-LABEL maintainer="chriswood@gmail.com"
-LABEL nginx_version="1.15"
-LABEL build_id="1567199712"
+FROM nginx:<%= image.labels['nginx_version'] %>-alpine
+<%= snippet('labels', binding) -%>
 
 ## START addition of DE from bcit/alpine
 ENV RUNUSER none
 ENV HOME /
 
-# Add docker-entrypoint script base
-ADD https://github.com/itsbcit/docker-entrypoint/releases/download/v1.5/docker-entrypoint.tar.gz /docker-entrypoint.tar.gz
-RUN tar zxvf docker-entrypoint.tar.gz && rm -f docker-entrypoint.tar.gz \
- && chmod -R 555 /docker-entrypoint.* \
- && chmod 664 /etc/passwd /etc/group /etc/shadow \
- && chown 0:0 /etc/shadow \
- && chmod 775 /etc
+<%= snippet('docker-entrypoint', binding) -%>
 
-# Add Tini
-ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini-static-amd64 /tini
-RUN chmod +x /tini
+<%= snippet('tini', binding) -%>
 
 ## END addition of DE from bcit/alpine
 
