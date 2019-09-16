@@ -1,14 +1,14 @@
-config_path=/config
-nginx_conf_path=/etc/nginx
-nginx_site_conf_file=default.conf
+config_path=${NGINX_CONFIG_PATH:-/config}
 
 if [ -d $config_path ]; then
-    for f in $config_path/*; do
-        if [ -f $f ]; then
-            cp -f $f $nginx_conf_path/
-        fi
+    for f in $(find ${config_path} -name '*.conf' -type f);do
+        case "$f" in
+            "${config_path}/default.conf")
+                cp $config_path/default.conf /etc/nginx/conf.d/default.conf
+                ;;
+            *)
+                cp $f /etc/nginx/
+                ;;
+        esac
     done
-    if [ -e $nginx_conf_path/$nginx_site_conf_file ]; then
-        mv $nginx_conf_path/$nginx_site_conf_file $nginx_conf_path/conf.d/
-    fi
 fi
