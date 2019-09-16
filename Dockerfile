@@ -1,25 +1,26 @@
-FROM nginx:1.15-alpine
-LABEL maintainer="chriswood@gmail.com"
-LABEL nginx_version="1.15"
-LABEL build_id="1567199712"
+FROM bcit/alpine:3.10
+LABEL maintainer="chriswood@gmail.com,jesse@weisner.ca"
+LABEL alpine_version="3.10"
+LABEL nginx_version="1.16.1"
+LABEL nginx_njs_version="0.3.5"
+LABEL nginx_apk_release="1"
+LABEL build_id="1568669578"
 
-## START addition of DE from bcit/alpine
-ENV RUNUSER none
-ENV HOME /
+ENV RUNUSER nginx
+ENV HOME /var/cache/nginx
 
-# Add docker-entrypoint script base
-ADD https://github.com/itsbcit/docker-entrypoint/releases/download/v1.5/docker-entrypoint.tar.gz /docker-entrypoint.tar.gz
-RUN tar zxvf docker-entrypoint.tar.gz && rm -f docker-entrypoint.tar.gz \
- && chmod -R 555 /docker-entrypoint.* \
- && chmod 664 /etc/passwd /etc/group /etc/shadow \
- && chown 0:0 /etc/shadow \
- && chmod 775 /etc
-
-# Add Tini
-ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini-static-amd64 /tini
-RUN chmod +x /tini
-
-## END addition of DE from bcit/alpine
+RUN printf "%s%s%s\n" \
+        "https://nginx.org/packages/alpine/v" \
+        "3.10" \
+        "/main" \
+    | tee -a /etc/apk/repositories \
+ && wget -O /etc/apk/keys/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub \
+ && apk add --no-cache \
+    nginx=1.16.1-r1 \
+    nginx-module-geoip=1.16.1-r1 \
+    nginx-module-image-filter=1.16.1-r1 \
+    nginx-module-xslt=1.16.1-r1 \
+    nginx-module-njs=1.16.1.0.3.5-r1
 
 RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
  && chmod 770 /var/cache/nginx \

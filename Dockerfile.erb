@@ -1,15 +1,21 @@
-FROM nginx:<%= image.labels['nginx_version'] %>-alpine
+FROM bcit/alpine:<%= image.labels['alpine_version'] %>
 <%= snippet('labels', binding) -%>
 
-## START addition of DE from bcit/alpine
-ENV RUNUSER none
-ENV HOME /
+ENV RUNUSER nginx
+ENV HOME /var/cache/nginx
 
-<%= snippet('docker-entrypoint', binding) -%>
-
-<%= snippet('tini', binding) -%>
-
-## END addition of DE from bcit/alpine
+RUN printf "%s%s%s\n" \
+        "https://nginx.org/packages/alpine/v" \
+        "<%= image.labels['alpine_version'] %>" \
+        "/main" \
+    | tee -a /etc/apk/repositories \
+ && wget -O /etc/apk/keys/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub \
+ && apk add --no-cache \
+    nginx=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
+    nginx-module-geoip=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
+    nginx-module-image-filter=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
+    nginx-module-xslt=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
+    nginx-module-njs=<%= image.labels['nginx_version'] %>.<%= image.labels['nginx_njs_version'] %>-r<%= image.labels['nginx_apk_release'] %>
 
 RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
  && chmod 770 /var/cache/nginx \
