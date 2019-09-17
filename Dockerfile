@@ -4,7 +4,7 @@ LABEL alpine_version="3.10"
 LABEL nginx_version="1.16.1"
 LABEL nginx_njs_version="0.3.5"
 LABEL nginx_apk_release="1"
-LABEL build_id="1568669578"
+LABEL build_id="1568673959"
 
 ENV RUNUSER nginx
 ENV HOME /var/cache/nginx
