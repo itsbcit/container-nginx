@@ -7,4 +7,5 @@ labels:
   nginx_njs_version: '0.3.5'
   nginx_apk_release: '1'
 suffixes:
+  - '1.16.1'
   - '1.16'
