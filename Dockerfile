@@ -4,7 +4,7 @@ LABEL alpine_version="3.10"
 LABEL nginx_version="1.16.1"
 LABEL nginx_njs_version="0.3.5"
 LABEL nginx_apk_release="1"
-LABEL build_id="1568673959"
+LABEL build_id="1568847799"
 
 ENV RUNUSER nginx
 ENV HOME /var/cache/nginx
@@ -30,7 +30,7 @@ RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
  #required for 50-copy-nginx-config.sh to copy config files
  && chmod 775 -R /etc/nginx/
 
-COPY 50-copy-nginx-config.sh /docker-entrypoint.d/
+COPY 50-copy-config.sh /docker-entrypoint.d/
 
 RUN touch /usr/share/nginx/html/ping
 
