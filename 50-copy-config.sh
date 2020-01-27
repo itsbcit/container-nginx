@@ -9,7 +9,7 @@ destfilename() {
 }
 
 if [ -d $config_path ]; then
-    for f in $(find ${config_path} -maxdepth 1 -type f -name "*.conf");do
+    for f in $(find ${config_path} -maxdepth 1 -name "*.conf");do
         case $(basename $f) in
             default.conf)
                 cp -fv $config_path/default.conf ${dest_path}/conf.d/default.conf
