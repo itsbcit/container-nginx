@@ -4,7 +4,7 @@ LABEL alpine_version="3.10"
 LABEL nginx_version="1.16.1"
 LABEL nginx_njs_version="0.3.5"
 LABEL nginx_apk_release="1"
-LABEL build_id="1580161932"
+LABEL build_id="1591134264"
 
 ENV RUNUSER nginx
 ENV HOME /var/cache/nginx
@@ -28,7 +28,9 @@ RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
  && sed -i "s/user  nginx;/#user  nginx;/" /etc/nginx/nginx.conf \
  && sed -i "s/listen       80;/listen       8080;/" /etc/nginx/conf.d/default.conf \
  #required for 50-copy-nginx-config.sh to copy config files
- && chmod 775 -R /etc/nginx/
+ && chmod 775 -R /etc/nginx/ \
+ && ln -sf /dev/stdout /var/log/nginx/access.log \
+ && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY 50-copy-config.sh /docker-entrypoint.d/
 
