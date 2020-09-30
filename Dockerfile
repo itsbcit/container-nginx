@@ -22,9 +22,11 @@ RUN printf "%s%s%s\n" \
     nginx-module-xslt=1.16.1-r1 \
     nginx-module-njs=1.16.1.0.3.5-r1
 
-RUN chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
+RUN mkdir /application /config \
+ && chown nginx:root /var/cache/nginx /var/run /var/log/nginx /run \
  && chmod 770 /var/cache/nginx \
- && chmod 775 /var/run /run /var/log/nginx \
+ && chmod 775 /var/run /run /var/log/nginx /application \
+ && ln -sf /usr/share/nginx/html/index.html /application/index.html \
  #required for 50-copy-nginx-config.sh to copy config files
  && chmod 775 -R /etc/nginx/ \
  && ln -sf /dev/stdout /var/log/nginx/access.log \
