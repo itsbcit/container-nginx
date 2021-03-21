@@ -14,6 +14,9 @@ if [ -d $config_path ]; then
             default.conf)
                 cp -fv $config_path/default.conf ${dest_path}/conf.d/default.conf
                 ;;
+            http.d-*.conf)
+                cp -fv $f $dest_path/http.d/$(destfilename $f "http.d")
+                ;;
             conf.d-*.conf)
                 cp -fv $f $dest_path/conf.d/$(destfilename $f "conf.d")
                 ;;

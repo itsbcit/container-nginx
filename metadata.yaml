@@ -2,10 +2,10 @@
 image_name: openshift-nginx
 labels:
   maintainer: 'chriswood@gmail.com,jesse@weisner.ca'
-  alpine_version: '3.10'
-  nginx_version: '1.16.1'
+  alpine_version: '3.13'
+  nginx_version: '1.18.0'
   nginx_njs_version: '0.3.5'
-  nginx_apk_release: '1'
+  nginx_apk_release: '13'
 suffixes:
-  - '1.16.1'
-  - '1.16'
+  - '1.18.1'
+  - '1.18'
