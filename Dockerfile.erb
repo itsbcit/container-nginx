@@ -1,4 +1,4 @@
-FROM bcit/alpine:<%= image.labels['alpine_version'] %>-latest
+FROM bcit/alpine:<%= image.vars['alpine_version'] %>-latest
 <%= snippet('labels', binding) -%>
 
 ENV RUNUSER nginx
@@ -6,18 +6,18 @@ ENV HOME /var/cache/nginx
 
 RUN printf "%s%s%s\n" \
         "https://nginx.org/packages/alpine/v" \
-        "<%= image.labels['alpine_version'] %>" \
+        "<%= image.vars['alpine_version'] %>" \
         "/main" \
     | tee -a /etc/apk/repositories \
  && wget -O /etc/apk/keys/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub \
  && apk add --no-cache \
-    nginx=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
-    nginx-mod-http-geoip2=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
-    nginx-mod-stream-geoip2=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
-    nginx-mod-http-image-filter=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
-    nginx-mod-http-xslt-filter=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
-    nginx-mod-http-js=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %> \
-    nginx-mod-stream-js=<%= image.labels['nginx_version'] %>-r<%= image.labels['nginx_apk_release'] %>
+    nginx=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %> \
+    nginx-mod-http-geoip2=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %> \
+    nginx-mod-stream-geoip2=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %> \
+    nginx-mod-http-image-filter=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %> \
+    nginx-mod-http-xslt-filter=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %> \
+    nginx-mod-http-js=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %> \
+    nginx-mod-stream-js=<%= image.vars['nginx_version'] %>-r<%= image.vars['nginx_apk_release'] %>
 
 RUN mkdir /application /config \
  && chown nginx:root /var/lib/nginx /var/run /var/log/nginx /run \
