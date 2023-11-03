@@ -6,8 +6,8 @@ labels:
   maintainer: 'chriswood@gmail.com,jesse@weisner.ca'
   nginx_version: '1.24.0'
 tags:
-  - latest
   - '<%= vars["nginx_version"] %>'
+base_tags:
 vars:
   alpine_version: '3.18'
   nginx_version: '1.24.0'
