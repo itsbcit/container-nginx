@@ -1,16 +1,16 @@
 ---
 image_name: nginx
 registries:
-  - url: bcit.io
+  - url: bcit.io/library
 labels:
   maintainer: 'chriswood@gmail.com,jesse@weisner.ca'
-  nginx_version: '1.22.0'
+  nginx_version: '1.24.0'
 tags:
   - latest
   - '<%= vars["nginx_version"] %>'
 vars:
-  alpine_version: '3.16'
-  nginx_version: '1.22.0'
-  nginx_apk_release: '0'
+  alpine_version: '3.18'
+  nginx_version: '1.24.0'
+  nginx_apk_release: '7'
   # nginx_njs_version: '0.5.3'
   
