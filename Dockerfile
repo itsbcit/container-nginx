@@ -1,6 +1,6 @@
 FROM bcit/alpine:3.18-latest
 LABEL maintainer="chriswood@gmail.com,jesse@weisner.ca"
-LABEL build_id="1700596180"
+LABEL build_id="1700607508"
 LABEL nginx_version="1.24.0"
 
 ENV RUNUSER nginx
