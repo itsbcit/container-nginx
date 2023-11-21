@@ -1,6 +1,6 @@
 FROM bcit/alpine:3.18-latest
 LABEL maintainer="chriswood@gmail.com,jesse@weisner.ca"
-LABEL build_id="1699034487"
+LABEL build_id="1700596180"
 LABEL nginx_version="1.24.0"
 
 ENV RUNUSER nginx
@@ -33,10 +33,12 @@ RUN mkdir /application /config \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY 50-copy-config.sh /docker-entrypoint.d/
-COPY --chown=nginx:root --chmod=664 nginx.conf /etc/nginx/nginx.conf
-COPY --chown=nginx:root --chmod=664 default.conf /etc/nginx/http.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY default.conf /etc/nginx/http.d/default.conf
 
-RUN touch /var/lib/nginx/html/ping
+RUN chown nginx:root /etc/nginx/nginx.conf /etc/nginx/http.d/default.conf \
+ && chmod 0664       /etc/nginx/nginx.conf /etc/nginx/http.d/default.conf \
+ && touch /var/lib/nginx/html/ping
 
 USER nginx
 WORKDIR /application
