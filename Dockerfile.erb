@@ -1,4 +1,4 @@
-FROM bcit/alpine:<%= image.vars['alpine_version'] %>-latest
+FROM bcit.io/library/alpine:<%= image.vars['alpine_version'] %>-latest
 <%= snippet('labels', binding) -%>
 
 ENV RUNUSER nginx
