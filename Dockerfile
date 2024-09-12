@@ -1,26 +1,26 @@
-FROM bcit.io/library/alpine:3.18-latest
+FROM bcit.io/library/alpine:3.20-latest
 
 LABEL maintainer="chriswood@gmail.com,jesse@weisner.ca"
-LABEL build_id="1711041709"
-LABEL nginx_version="1.24.0"
+LABEL build_id="1726161325"
+LABEL nginx_version="1.26.0"
 
 ENV RUNUSER nginx
 ENV HOME /var/cache/nginx
 
 RUN printf "%s%s%s\n" \
         "https://nginx.org/packages/alpine/" \
-        "v3.18" \
+        "v3.20" \
         "/main" \
     | tee -a /etc/apk/repositories \
  && wget -O /etc/apk/keys/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub \
  && apk add --no-cache \
-    nginx=1.24.0-r7 \
-    nginx-mod-http-geoip2=1.24.0-r7 \
-    nginx-mod-stream-geoip2=1.24.0-r7 \
-    nginx-mod-http-image-filter=1.24.0-r7 \
-    nginx-mod-http-xslt-filter=1.24.0-r7 \
-    nginx-mod-http-js=1.24.0-r7 \
-    nginx-mod-stream-js=1.24.0-r7
+    nginx=1.26.2-r0 \
+    nginx-mod-http-geoip2=1.26.2-r0 \
+    nginx-mod-stream-geoip2=1.26.2-r0 \
+    nginx-mod-http-image-filter=1.26.2-r0 \
+    nginx-mod-http-xslt-filter=1.26.2-r0 \
+    nginx-mod-http-js=1.26.2-r0 \
+    nginx-mod-stream-js=1.26.2-r0
 
 RUN mkdir /application /config \
     && chown nginx:root /var/lib/nginx /var/run /var/log/nginx /run \
