@@ -4,13 +4,11 @@ registries:
   - url: bcit.io/library
 labels:
   maintainer: 'chriswood@gmail.com,jesse@weisner.ca'
-  nginx_version: '1.26.0'
+  nginx_version: '1.30.4'
 tags:
   - '<%= vars["nginx_version"] %>'
 base_tags:
 vars:
   alpine_version: '3.24'
-  nginx_version: '1.26.2'
-  nginx_apk_release: '0'
-  # nginx_njs_version: '0.5.3'
-  
+  nginx_version: '1.30.4'
+  nginx_apk_release: '1'
